@@ -1,0 +1,18 @@
+Enter junk text here
+Some new finding
+More junk to follow.circuit
+bughnijk.end
+.circuit
+V1 GND 1 10
+R1 1 2 1e3
+R2 2 3 1e3                                          #Enter comment here
+R3 3 4 1e3 #.end
+R4 4 5 1e3 #one more comment
+R5 2 GND 2e3
+R6 3 GND 2e3 #.cir
+R7 4 GND 2e3
+R8 5 GND 2e3
+.end
+Enter junk here
+Some new finding
+More junk to follow

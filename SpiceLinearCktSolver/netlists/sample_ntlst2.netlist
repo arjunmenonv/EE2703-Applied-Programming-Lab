@@ -1,0 +1,112 @@
+.circuit
+V1 1 GND ac 1 0
+L1 1 2 1
+R1 2 3 1
+C1 3 GND 1
+.end
+.ac V1 0.159154
+Irrelevant features of asgn2.py
+'''
+class VCVS:
+	def __init__(self, name, node_p, node_m, ctrl_p, ctrl_m, gain):
+		self.name = name
+		self.node_p = node_p
+		self.node_m = node_m
+		self.ctrl_p = ctrl_p
+		self.ctrl_m = ctrl_m
+		self.gain = gain
+class VCCS:
+	def __init__(self, name, node_p, node_m, ctrl_p, ctrl_m, gain):
+		self.name = name
+		self.node_p = node_p
+		self.node_m = node_m
+		self.ctrl_p = ctrl_p
+		self.ctrl_m = ctrl_m
+		self.gain = gain
+class CCVS:
+	def __init__(self, name, node_p, node_m, v_src, gain):
+		self.name = name
+		self.node_p = node_p
+		self.node_m = node_m
+		self.v_src = v_src
+		self.gain = gain
+class CCCS:
+	def __init__(self, name, node_p, node_m, v_src, gain):
+		self.name = name
+		self.node_p = node_p
+		self.node_m = node_m
+		self.v_src = v_src
+		self.gain = gain
+elif (obj_type == "E"):		#VCVS
+		dummy_obj = VCCS(comp_def[0], comp_def[1], comp_def[2], comp_def[3], comp_def[4], comp_def[5])
+		E.append(dummy_obj)
+	elif (obj_type == "G"):		#VCCS
+		dummy_obj = VCCS(comp_def[0], comp_def[1], comp_def[2], comp_def[3], comp_def[4], comp_def[5])
+		G.append(dummy_obj)
+	elif (obj_type == "F"):		#CCCS
+		dummy_obj = CCCS(comp_def[0], comp_def[1], comp_def[2], comp_def[3], comp_def[4])
+		F.append(dummy_obj)
+	elif (obj_type == "H"):		#CCVS
+		dummy_obj = CCVS(comp_def[0], comp_def[1], comp_def[2], comp_def[3], comp_def[4])
+		H.append(dummy_obj)
+for VCCS in G:
+		if(nodes[i] == VCCS.node_p):
+			node_1 = VCCS.ctrl_p
+			node_2 = VCCS.ctrl_m
+			A[i][node_1] += VCCS.gain
+			A[i][node_2] -= VCCS.gain
+		elif(nodes[i] == VCCS.node_m):
+			node_1 = VCCS.ctrl_p
+			node_2 = VCCS.ctrl_m
+			A[i][node_1] -= VCCS.gain
+			A[i][node_2] += VCCS.gain
+	for CCCS in F:
+		if(nodes[i] == CCCS.node_p):
+			V_pos = V_s.index(CCCS.v_src)
+			node_2 = CCCS.node_m
+			A[i][n+V_pos] += CCCS.gain
+			A[node_2][n+V_pos] -= CCCS.gain
+	for VCVS in E:
+		if(nodes[i] == VCVS.node_p):
+			node_1 = VCVS.ctrl_p
+			node_2 = VCVS.ctrl_m
+			V_pos = V_s.index(VCVS.v_src)
+class node:
+	V_node = 0
+	comp_array = []
+	def __init__(self, name, comp_array):
+		self.name = name
+		self.comp_array = comp_array
+
+for comp in psv:
+	node_name = comp.node_p; node_obj = comp; node_neg = comp.node_m; flag = 0; cmp_arr = []
+	for i in range(len(nodes)):
+		if (nodes[i].name == node_name):
+			cmp_arr.append(node_obj)
+			nodes[i].comp_array = cmp_arr
+			flag = -1
+			break
+	if (flag == 0):
+		cmp_arr.append(node_obj)
+		dummy_node = node(node_name, cmp_arr)
+		nodes.append(dummy_node)
+
+for i in range(len(nodes)):
+	print(nodes[i].name, nodes[i].comp_array)
+'''	
+
+# Inductor in case of DC
+'''
+TEST CURRENT STATUS:
+print(circ_def, ac_char)
+V_1 = V_src('V_1', 'node1', 'node2', [1, 50, 5, 0])
+V_2 = V_src('V_2', 'node2', 'node3', [0, 20])
+print(V_2.is_ac, V_2.frequency, V_2.dc_val)
+#
+for comp_def in circ_def:
+	print(gen_obj(comp_def, frequency))
+for i in range(len(V_s)):
+	print(V_s[i].name, V_s[i].is_ac, V_s[i].frequency, V_s[i].mag*2, V_s[i].phase, V_s[i].dc_val*5)
+
+
+''' 
